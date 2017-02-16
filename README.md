@@ -8,5 +8,5 @@ Unless otherwise specified(Reveal.js) the code is licensed under the MIT license
 ### Dependencies
 The only dependency for this repo is reveal.js which is included as a submodule
 ### Setup
-- git submodule init && git submodule update
+- `git submodule init && git submodule update`
 - Go ahead and start editing the index.
