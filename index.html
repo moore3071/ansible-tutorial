@@ -62,7 +62,7 @@
 							<li> modules </li>
 							<li> playbooks </li>
 							<li> vaults </li>
-							<li> hosts file </li>
+							<li> inventory </li>
 						</ul>
 					</p>
 				</section>
@@ -74,16 +74,97 @@
 						</p>
 					</section>
 					<section>
-						<h3> If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material. </h3>
+						<h3> If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material. </h3> <h5>-Ansible documentation</h5>
 					</section>
 					<section>
 						Modules allow common commands to be packaged into an easy to use tool. Modules such as <a href="https://docs.ansible.com/ansible/package_module.html"> package, </a> which allows managing installed packages across distribution package managers (e.g. apt, yum, pacman, emerge) make system administration simple.
 					</section>
 					<section>
-						Playbooks allow the stringing together of commands to allow automated status updates. 
+						Playbooks allow the stringing together of commands to allow automated status updates. Playbooks are the most frequent tool you'll be using in Ansible to run a series of tasks (possibly repeatedly via cron)
+					</section>
+					<section>
+						<h3>Running playbooks</h3>
+						<code>
+							ansible-playbook playbook.yml
+						</code>
+					</section>
+					<section>
+						<h3>Running one off commands</h3>
+						One off commands be run with `ansible` as seen below
+						<code>
+							ansible localhost -m ping
+							ansible localhost -a ls
+						</code>
 					</section>
 				</section>
+				<section>
+					<h2> Vaults: protecting credentials </h2>
+					Vaults help to keep your secrets, such as passwords, safe. Files are encrypted with AES
+					<code>
+						ansible-vault [create|decrypt|edit|encrypt|rekey|view] vault_file.yml
+					</code>
+				</section>
+				<section>
+					<h2> Inventory </h2>
+					Inventory files list the hosts (and possibly variables such as ports and users).
+					<code>
+						; /etc/ansible/hosts
+						[my-awesome-site:children]
+						webservers
+						databases
 
+						[webservers]
+						main ansible_host=74.125.21.100 ;named entry
+						www.example.com ;simple domain name
+
+						[databases]
+						db.example.com
+						backup.example.com
+					</code>
+				</section>
+				<!-- TODO: Make the three examples/tutorials below -->
+				<section>
+					<section>
+						<h1> Example/tutorial 1: Localhost </h1>
+					</section>
+					<section>
+						<h3> Dependencies </h3>
+						<ul>
+							<li> Ansible </li>
+						</ul>
+					</section>
+					<section>
+						<h3> Ad Hoc commands: Pinging the localhost </h3>
+						<code>
+							$ansible localhost -m ping #this uses the module 'ping' on localhost
+						</code>
+					</section>
+					<section>
+						<h3> Ad Hoc commands: running shell commands </h3>
+						<code>
+							$ansible localhost -a 'ls -al' #this allows a single command to be run
+						</code>
+					</section>
+					<section>
+						<h3> Making a playbook </h3>
+						<code>
+							---
+							# test-playbook.yml
+							- hosts: all
+							  tasks:
+							  - 
+
+				</section>
+				<section>
+					<section>
+						<h1> Example/tutorial 2: docker </h1>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1> Example/tutorial 3: vagrant </h1>
+					</section>
+				</section>
 			</div>
 
 		</div>
