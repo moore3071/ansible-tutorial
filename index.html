@@ -1,74 +1,74 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-	<meta charset="utf-8">
+	<head>
+		<meta charset="utf-8">
 
-	<title>Ansible tutorial</title>
+		<title>Ansible tutorial</title>
 
-	<meta name="description" content="A quick intro to Ansible CM for CSE 5914">
+		<meta name="description" content="A quick intro to Ansible CM for CSE 5914">
 
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-	<link rel="stylesheet" href="reveal.js/css/reveal.css">
-	<link rel="stylesheet" href="reveal.js/css/theme/blood.css" id="theme">
+		<link rel="stylesheet" href="reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/blood.css" id="theme">
 
-	<!-- Code syntax highlighting -->
-	<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
 
-	<!-- Printing and PDF exports -->
-	<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		<!-- Printing and PDF exports -->
+		<script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
-	<!--[if lt IE 9]>
-	<script src="lib/js/html5shiv.js"></script>
-	<![endif]-->
-</head>
+		<!--[if lt IE 9]>
+			<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
 
-<body>
+	<body>
 
-<div class="reveal">
+		<div class="reveal">
 
-	<!-- Any section element inside of this container is displayed as a slide -->
-	<div class="slides">
-		<section>
-			<h1>What is Ansible?</h1>
-			<h3>Looking into Ansible</h3>
-			<p>
-				<small>By Faster than Light</small>
-			</p>
-		</section>
-		<section>
-			<h2> Ansible: Automation for sysadmins </h2>
-			<p>
-				Ansible allows automation and configuration management for numerous hosts.
-			</p>
-		</section>
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>What is Ansible?</h1>
+					<h3>Looking into Ansible</h3>
+					<p>
+					<small>By Faster than Light</small>
+					</p>
+				</section>
+				<section>
+					<h2> Ansible: Automation for sysadmins </h2>
+					<p>
+					Ansible allows automation and configuration management for numerous hosts.
+					</p>
+				</section>
 				<section>
 					<h2> Tools of Ansible </h2>
 					<p>
-						Ansible is composed of some tools such as:
-						<ul>
-							<li> modules </li>
-							<li> playbooks </li>
-							<li> vaults </li>
-							<li> inventory </li>
-						</ul>
+					Ansible is composed of some tools such as:
+					<ul>
+						<li> modules </li>
+						<li> playbooks </li>
+						<li> vaults </li>
+						<li> inventory </li>
+					</ul>
 					</p>
 				</section>
 				<section>
 					<section>
 						<h2> modules and playbooks: telling ansible what to do </h2>
 						<p>
-							Modules and playbooks are the actually code that gets run on different hosts
+						Modules and playbooks are the actually code that gets run on different hosts
 						</p>
 					</section>
 					<section>
@@ -82,48 +82,52 @@
 					</section>
 					<section>
 						<h3>Running playbooks</h3>
-						<code>
-							ansible-playbook playbook.yml
-						</code>
+						<br/>
+						<pre><code class="hljs">
+ansible-playbook playbook.yml
+						</code></pre>
 					</section>
 					<section>
 						<h3>Running one off commands</h3>
 						One off commands be run with `ansible` as seen below
-						<code>
-							ansible localhost -m ping
-							ansible localhost -a ls
-						</code>
+						<br/>
+						<pre><code class="hljs">
+$ansible localhost -m ping
+$ansible localhost -a ls
+						</code></pre>
 					</section>
 				</section>
 				<section>
 					<h2> Vaults: protecting credentials </h2>
 					Vaults help to keep your secrets, such as passwords, safe. Files are encrypted with AES
-					<code>
-						ansible-vault [create|decrypt|edit|encrypt|rekey|view] vault_file.yml
-					</code>
+					<br/>
+					<pre><code class="hljs">
+ansible-vault [create|decrypt|edit|encrypt|rekey|view] vault_file.yml
+					</code></pre>
 				</section>
 				<section>
 					<h2> Inventory </h2>
 					Inventory files list the hosts (and possibly variables such as ports and users).
-					<code>
-						; /etc/ansible/hosts
-						[my-awesome-site:children]
-						webservers
-						databases
+					<br/>
+					<pre><code class="hljs">
+; /etc/ansible/hosts
+[my-awesome-site:children]
+webservers
+databases
 
-						[webservers]
-						main ansible_host=74.125.21.100 ;named entry
-						www.example.com ;simple domain name
+[webservers]
+main ansible_host=74.125.21.100 ;named entry
+www.example.com ;simple domain name
 
-						[databases]
-						db.example.com
-						backup.example.com
-					</code>
+[databases]
+db.example.com
+backup.example.com
+					</code></pre>
 				</section>
 				<!-- TODO: Make the three examples/tutorials below -->
 				<section>
 					<section>
-						<h1> Example/tutorial 1: Localhost </h1>
+						<h2> Example/tutorial 1: Localhost </h2>
 					</section>
 					<section>
 						<h3> Dependencies </h3>
@@ -133,35 +137,38 @@
 					</section>
 					<section>
 						<h3> Ad Hoc commands: Pinging the localhost </h3>
-						<code>
-							$ansible localhost -m ping #this uses the module 'ping' on localhost
-						</code>
+						<pre><code class="hljs">
+#this uses the module 'ping' on localhost
+$ansible localhost -m ping
+						</code></pre>
 					</section>
 					<section>
 						<h3> Ad Hoc commands: running shell commands </h3>
-						<code>
-							$ansible localhost -a 'ls -al' #this allows a single command to be run
-						</code>
+						<pre><code class="hljs">
+#this allows a single command to be run
+$ansible localhost -a 'ls -al'
+						</code></pre>
 					</section>
 					<section>
 						<h3> Making a playbook </h3>
-						<code>
-							---
-							# test-playbook.yml
-							- hosts: all
-							  tasks:
-							  - 
-						</code>
+						<pre><code class="hljs">
+---
+# test-playbook.yml
+- hosts: all
+tasks:
+- 
+						</code></pre>
 					</section>
 				</section>
-        <section>
 				<section>
-					<h1> Example/tutorial 2: docker </h1>
+					<section>
+						<h2> Example/tutorial 2: docker </h2>
+					</section>
 				</section>
-			</section>
-			<section>
 				<section>
-					<h1> Example/tutorial 3: vagrant </h1>
+					<section>
+						<h2> Example/tutorial 3: vagrant </h2>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -169,143 +176,143 @@
 					</section>
 					<section>
 						<p>
-							The competitors of Ansible include:
-							<ul>
-								<li> Puppet </li>
-								<li> Chef </li>
-								<li> SaltStack </li>
-								<li> Terraform </li>
-								<li> CloudFormation </li>
-							</ul>
+						The competitors of Ansible include:
+						<ul>
+							<li> Puppet </li>
+							<li> Chef </li>
+							<li> SaltStack </li>
+							<li> Terraform </li>
+							<li> CloudFormation </li>
+						</ul>
 						</p>
 					</section>
 					<section>
 						<p>
-							Ansible users write playbooks in a descriptive language similar to YAML and Jinja.  Users may prefer to use a competitor that uses a language they know, or that is coded in a more procedural style.  For example, Terraform uses Go, and Puppet uses Ruby.
+						Ansible users write playbooks in a descriptive language similar to YAML and Jinja.  Users may prefer to use a competitor that uses a language they know, or that is coded in a more procedural style.  For example, Terraform uses Go, and Puppet uses Ruby.
 						</p>
 					</section>
 					<section>
 						<p>
-							Ansible is often preferred because it uses client-only architecture.  Many of its competitors, including Chef, SaltStack, and Puppet, use client-server architecture.  However, there are two competitors, CloudFormation and Terraform, that also offer client-only architecture.  Ansible is flexible and can be used either as push-based or pull-based system.
+						Ansible is often preferred because it uses client-only architecture.  Many of its competitors, including Chef, SaltStack, and Puppet, use client-server architecture.  However, there are two competitors, CloudFormation and Terraform, that also offer client-only architecture.  Ansible is flexible and can be used either as push-based or pull-based system.
 						</p>
 					</section>
 					<section>
 						<p>
-							Ansible was first written for use in command line only.  Unfortunately, this remains relevant, because the majority of functionality available in the command line is not available from the user interface.
+						Ansible was first written for use in command line only.  Unfortunately, this remains relevant, because the majority of functionality available in the command line is not available from the user interface.
 						</p>
 					</section>
 					<section>
 						<p>
-							Ansible is one of the newer configuration management tools, and some of its more established competitors, like Chef, offer greater stability.  Chef and Puppet users will benefit from a larger user and developer communities.
+						Ansible is one of the newer configuration management tools, and some of its more established competitors, like Chef, offer greater stability.  Chef and Puppet users will benefit from a larger user and developer communities.
 						</p>
 					</section>
 					<section>
 						<p>
-							Ansible nodes are managed by default over SSH.  SSH communication can face reduced speed in a scaled or downsized environment.  Furthermore, although Ansible uses an agentless architecture, machines must have a Python interpreter installed and require root SSH access for most functionality.
+						Ansible nodes are managed by default over SSH.  SSH communication can face reduced speed in a scaled or downsized environment.  Furthermore, although Ansible uses an agentless architecture, machines must have a Python interpreter installed and require root SSH access for most functionality.
 						</p>
 					</section>
 				</section>
-				
+
 				<!-- USE CASES-->
-		<section>
+				<section>
 
-			<section>
-				<h2> Use Case Example 1: Installing new software my servers</h2>
-				<p>
-					We need to install the package "nginx" on all of our servers
-				</p>
-			</section>
+					<section>
+						<h2> Use Case Example 1: Installing new software my servers</h2>
+						<p>
+						We need to install the package "nginx" on all of our servers
+						</p>
+					</section>
 
-			<section>
-				<p>
-					We can do this by running:
-				</p>
-				<p>
-					" ansible all -s -m shell -a 'apt-get install nginx' "
-				</p>
-				<p>
-					We have just ran a task. Ansible also allows combining different tasks into a taskfile, which will itself be part of a
-					"Role". A Role will have the taskfile and all its related files. (more on this later)
-				</p>
-			</section>
-			<section>
-				<p>
-					However, we could probably have done the same thing with a bash script. What sets ansible apart is
-					the ability to ensure idempotence (same final result).
-				</p>
-			</section>
-			<section>
-				<p>
-					Running " ansible all -s -m apt -a 'pkg=nginx state=installed update_cache=true' " will also install nginx
-					on all of our servers. </p>
-				<p>
-					But this will also ensure idempotence.
-					Note that we used the ansible module 'apt' to accomplish this. Modules are an essential part of ansible.
-				</p>
-			</section>
+					<section>
+						<p>
+						We can do this by running:
+						</p>
+						<p>
+						" ansible all -s -m shell -a 'apt-get install nginx' "
+						</p>
+						<p>
+						We have just ran a task. Ansible also allows combining different tasks into a taskfile, which will itself be part of a
+						"Role". A Role will have the taskfile and all its related files. (more on this later)
+						</p>
+					</section>
+					<section>
+						<p>
+						However, we could probably have done the same thing with a bash script. What sets ansible apart is
+						the ability to ensure idempotence (same final result).
+						</p>
+					</section>
+					<section>
+						<p>
+						Running " ansible all -s -m apt -a 'pkg=nginx state=installed update_cache=true' " will also install nginx
+						on all of our servers. </p>
+						<p>
+						But this will also ensure idempotence.
+						Note that we used the ansible module 'apt' to accomplish this. Modules are an essential part of ansible.
+						</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2> Use Case Example 2: Adding a database to our servers</h2>
+						<p>
+						We can write the following taskfile for our "createDB" role:
+						</p>
+					</section>
 
+					<section>
+						<p>Recall that the structure of a role looks like this:</p>
+						<img src="roleStruct.png" align="middle">
+						<p>When we run the role, Ansible will automatically run the "main.yml" taskfile in that role.</p>
+					</section>
 
-			<section>
-				<h2> Use Case Example 2: Adding a database to our servers</h2>
-				<p>
-					We can write the following taskfile for our "createDB" role:
-				</p>
-			</section>
+					<section>
+						<img src="pic.png" align="middle">
+					</section>
 
-			<section>
-				<p>Recall that the structure of a role looks like this:</p>
-				<img src="roleStruct.png" align="middle">
-				<p>When we run the role, Ansible will automatically run the "main.yml" taskfile in that role.</p>
-			</section>
+					<section>
+						<p>To run our role, we need to create a playbook file which calls our role, running our taskfile.</p>
+						<p>Playbook files are in the .yml format, and can call multiple roles. Here is one which will call our "createDB" role. Assume that
+						the following playbook file is "DBplaybook.yml</p>
+						<img src="pic2.png" align="middle">
+					</section>
+					<section>
+						<p>We now simply run:</p>
+						<p>"ansible-playbook DBplaybook.yml"</p>
+						<p>And the database will be set up on all of our servers!</p>
+					</section>
+				</section>
 
-			<section>
-				<img src="pic.png" align="middle">
-			</section>
+			</div>
 
-			<section>
-				<p>To run our role, we need to create a playbook file which calls our role, running our taskfile.</p>
-				<p>Playbook files are in the .yml format, and can call multiple roles. Here is one which will call our "createDB" role. Assume that
-					the following playbook file is "DBplaybook.yml</p>
-				<img src="pic2.png" align="middle">
-			</section>
-			<section>
-				<p>We now simply run:</p>
-				<p>"ansible-playbook DBplaybook.yml"</p>
-				<p>And the database will be set up on all of our servers!</p>
-			</section>
-		</section>
+		</div>
 
-	</div>
+		<script src="reveal.js/lib/js/head.min.js"></script>
+		<script src="reveal.js/js/reveal.js"></script>
 
-</div>
+		<script>
 
-<script src="reveal.js/lib/js/head.min.js"></script>
-<script src="reveal.js/js/reveal.js"></script>
+// Full list of configuration options available at:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+	controls: true,
+	progress: true,
+	history: true,
+	center: true,
 
-<script>
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
-
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
-					{ src: 'reveal.js/plugin/notes/notes.js', async: true }
-				]
-			});
+	// Optional reveal.js plugins
+	dependencies: [
+		{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+		{ src: 'reveal.js/plugin/notes/notes.js', async: true }
+	]
+});
 
 		</script>
 
-</body>
+	</body>
 </html>
