@@ -161,27 +161,38 @@ backup.example.com
 						<p>
 						We can do this by running:
 						</p>
+						<pre><code>
+$ansible all -s -m shell -a 'apt-get install nginx'
+						</code></pre>
 						<p>
-						" ansible all -s -m shell -a 'apt-get install nginx' "
-						</p>
-						<p>
-						We have just ran a task. Ansible also allows combining different tasks into a taskfile, which will itself be part of a
-						"Role". A Role will have the taskfile and all its related files. (more on this later)
-						</p>
-					</section>
-					<section>
-						<p>
-						However, we could probably have done the same thing with a bash script. What sets ansible apart is
-						the ability to ensure idempotence (same final result).
+						We have just ran a task. Ansible also allows combining different tasks into a taskfile, which will itself be part of a "Role". A Role will have the taskfile and all its related files. (more on this later)
 						</p>
 					</section>
 					<section>
 						<p>
-						Running " ansible all -s -m apt -a 'pkg=nginx state=installed update_cache=true' " will also install nginx
-						on all of our servers. </p>
+						However, we could probably have done the same thing with a bash script. What sets ansible apart is the ability to ensure idempotence (same final result).
+						</p>
+					</section>
+					<section>
 						<p>
-						But this will also ensure idempotence.
-						Note that we used the ansible module 'apt' to accomplish this. Modules are an essential part of ansible.
+						Running the code below will also install nginx on all of our servers 
+						</p>
+						<pre><code>
+ansible all -s -m apt -a 'pkg=nginx state=installed update_cache=true'
+						</code></pre>
+						<p>
+						The response will be:
+						</p>
+						<pre><code>
+127.0.0.1 | success >>
+{
+"changed": false
+}
+						</code></pre>
+					</section>
+					<section>
+						<p>
+						Note that this will also ensure idempotence. Note that we used the ansible module 'apt' to accomplish this. Modules are an essential part of ansible.
 						</p>
 					</section>
 				</section>
@@ -205,16 +216,16 @@ backup.example.com
 
 					<section>
 						<p>To run our role, we need to create a playbook file which calls our role, running our taskfile.</p>
-						<p>Playbook files are in the .yml format, and can call multiple roles. Here is one which will call our "createDB" role. Assume that
-						the following playbook file is "DBplaybook.yml</p>
+						<p>Playbook files are in the .yml format, and can call multiple roles. Here is one which will call our "createDB" role. Assume that the following playbook file is "DBplaybook.yml"</p>
 						<img src="pic2.png" align="middle">
 					</section>
 					<section>
 						<p>We now simply run:</p>
-						<p>"ansible-playbook DBplaybook.yml"</p>
+						<pre><code>ansible-playbook DBplaybook.yml</code></pre>
 						<p>And the database will be set up on all of our servers!</p>
 					</section>
 				</section>
+				<!-- End use cases -->
 
 				<!-- alternatives to ansible -->
 				<section>
