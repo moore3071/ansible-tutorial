@@ -81,6 +81,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 					<ul>
 						<li> modules </li>
 						<li> playbooks </li>
+						<li> Roles </li>
 						<li> vaults </li>
 						<li> inventory </li>
 					</ul>
@@ -88,7 +89,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 				</section>
 				<section>
 					<section>
-						<h2> modules and playbooks: telling ansible what to do </h2>
+						<h2> modules, roles, and playbooks: telling ansible what to do </h2>
 						<p>
 						Modules and playbooks are the actually code that gets run on different hosts
 						</p>
@@ -116,6 +117,23 @@ ansible-playbook playbook.yml
 						<pre><code class="hljs">
 $ansible localhost -m ping
 $ansible localhost -a ls
+						</code></pre>
+					</section>
+					<section>
+						<h3> Roles: DRY(Don't repeat yourself) </h3>
+						Roles are a useful tool to avoid writing the same task over and over with the same variables and features in different playbooks. The file structure including roles might look like:
+						<pre><code>
+site.yml
+webservers.yml
+roles/
+	role1/
+		files/
+		templates/
+		tasks/
+		handlers/
+		vars/
+		defaults/
+		meta/
 						</code></pre>
 					</section>
 				</section>
@@ -301,20 +319,53 @@ $ansible localhost -a 'ls -al'
 						<pre><code class="hljs">
 ---
 # test-playbook.yml
-- hosts: all
-tasks:
-- 
+- hosts: localhost
+  tasks:
+    - name: list homedir
+      shell: ls
+    - name: make ~/temp or update access time
+      shell: touch temp
+    - name: fail to make or update /tmp
+      shell: touch tmp
+      args:
+        chdir: /
+						</code></pre>
+					</section>
+					<section>
+						<h3> Running our playbook </h3>
+						<pre><code class="hljs">
+ansible-playbook test-playbook.yml
+						</code></pre>
+					</section>
+					<section>
+						<h2> The command failed. Can you fix it </h3>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2> Example/tutorial 2: docker/ansible-container </h2>
+					</section>
+					<section>
+						<p> Ansible container allows you to configure and automate your containers in a sane manner that doesn't require bash scripts, and uses ansible playbooks. yay!</p>
+					</section>
+					<section>
+						<h3> Dependencies </h3>
+						<p>Ansible-container is not included in Ansible. You'll need to install it <a href="https://docs.ansible.com/ansible-container/installation.html#getting-ansible-container"> here </a> </p>
+					</section>
+					<section>
+						<h3> Basic example </h3>
+						<p> Make a new directory and cd into it then run: </p>
+						<pre><code>
+$ansible-container init
+$ansible-container build
+$ansible-container run
 						</code></pre>
 					</section>
 				</section>
 				<section>
 					<section>
-						<h2> Example/tutorial 2: docker </h2>
-					</section>
-				</section>
-				<section>
-					<section>
 						<h2> Example/tutorial 3: vagrant </h2>
+						<a href="https://github.com/geerlingguy/ansible-vagrant-examples">Shamelessly stolen from geerlingguy</a>
 					</section>
 				</section>
 
