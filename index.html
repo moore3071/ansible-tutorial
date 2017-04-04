@@ -198,7 +198,8 @@ $ansible all -s -m shell -a 'apt-get install nginx'
 						Running the code below will also install nginx on all of our servers 
 						</p>
 						<pre><code>
-ansible all -s -m apt -a 'pkg=nginx state=installed update_cache=true'
+ansible all -s -m apt -a
+'pkg=nginx state=installed update_cache=true'
 						</code></pre>
 						<p>
 						The response will be:
